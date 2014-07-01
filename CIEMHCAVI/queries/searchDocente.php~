@@ -1,0 +1,41 @@
+<?php
+
+include 'Conexion.php';
+
+$conexion = new Conexion();
+$conn = $conexion->connection();
+if($conn!=null){
+	if(!empty($_POST['nombre']) || !empty($_POST['ape1']) || !empty($_POST['ape2']) || !empty($_POST['cedula']))
+	{
+		$espNombre="%".$_POST['nombre']."%";
+		$espApe1="%".$_POST['ape1']."%";
+		$espApe2="%".$_POST['ape2']."%";
+		if($_POST['cedula']=="#°$")
+		{
+			$stmt= mysqli_prepare($conn,"select * from tbl_docente where Docente_Nombre LIKE ? and Docente_Ape1 LIKE ? and Docente_Ap2 LIKE ? and Docente_Cedula LIKE '%0%'");
+			@mysqli_stmt_bind_param($stmt, 'sss' , $espNombre, $espApe1, $espApe2);
+		}
+		else
+		{
+			$espCedula="%".$_POST['cedula']."%";
+			$stmt= mysqli_prepare($conn,"select * from tbl_docente where Docente_Nombre LIKE ? and Docente_Ape1 LIKE ? and Docente_Ap2 LIKE ? and Docente_Cedula LIKE ?");
+			@mysqli_stmt_bind_param($stmt, 'ssss' , $espNombre, $espApe1, $espApe2, $espCedula);
+		}
+		@mysqli_stmt_execute($stmt);
+		@mysqli_stmt_bind_result($stmt,$cedula,$nombre,$ape1,$ape2,$nac,$telefono,$dir,$correo,$fechaNac,$genero,$foto);
+		$html="";
+		while(mysqli_stmt_fetch($stmt))
+		{
+			$html= $html."<tr><td>".$nombre."</td>"."<td>".$ape1."</td>"."<td>".$ape2."</td>"."<td>".$cedula."</td>"."<td>".$correo."</td>"."<td>".$telefono."</td>"."</tr>";
+		}
+		@mysqli_stmt_close($stmt);
+		@mysqli_close($conn); 
+		echo $html;
+	}
+	
+}
+else{
+	echo "¡Error, no se logro comunicar con el servidor!";
+}
+@mysqli_close($conn); 
+?>

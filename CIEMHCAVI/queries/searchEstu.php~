@@ -1,0 +1,45 @@
+<?php
+
+include 'Conexion.php';
+
+$conexion = new Conexion();
+$conn = $conexion->connection();
+if($conn!=null){
+	$tempCarrera = $_POST['carrera'];
+	if($tempCarrera == 'Seleccione una...'){ $tempCarrera = '';}
+	if(!empty($_POST['nombre']) || !empty($_POST['ape1']) || !empty($_POST['ape2']) || !empty($_POST['cedula']) || !empty($_POST['carnet']) || !empty($tempCarrera))
+	{
+		$espNombre="%".$_POST['nombre']."%";
+		$espApe1="%".$_POST['ape1']."%";
+		$espApe2="%".$_POST['ape2']."%";
+		$espCarnet="%".$_POST['carnet']."%";
+		$espCarrera="%".$tempCarrera."%";
+		if($_POST['cedula']=="#°$")
+		{
+			$stmt= mysqli_prepare($conn,"select E.Estudiante_Cedula, Estudiante_Nombre, Estudiante_Ape1, Estudiante_Ap2, Estudiante_Email, Estudiante_Carnet from carrera_estudiante CE, tbl_estudiante E, tbl_carrera C where E.Estudiante_Nombre LIKE ? and E.Estudiante_Ape1 LIKE ? and E.Estudiante_Ap2 LIKE ? and E.Estudiante_Cedula LIKE '%0%' and E.Estudiante_Carnet LIKE ? and E.Estudiante_Cedula = CE.Estudiante_Ced and C.Carrera_Nombre LIKE ? and C.Carrera_Nombre = CE.Carrera_Nombre");
+			@mysqli_stmt_bind_param($stmt, 'sssss' , $espNombre, $espApe1, $espApe2, $espCarnet, $espCarrera);
+		}
+		else
+		{
+			$espCedula="%".$_POST['cedula']."%";
+			$stmt= mysqli_prepare($conn,"select E.Estudiante_Cedula, Estudiante_Nombre, Estudiante_Ape1, Estudiante_Ap2, Estudiante_Email, Estudiante_Carnet from carrera_estudiante CE, tbl_estudiante E, tbl_carrera C where E.Estudiante_Nombre LIKE ? and E.Estudiante_Ape1 LIKE ? and E.Estudiante_Ap2 LIKE ? and E.Estudiante_Cedula LIKE ? and E.Estudiante_Carnet LIKE ? and E.Estudiante_Cedula = CE.Estudiante_Ced and C.Carrera_Nombre LIKE ? and C.Carrera_Nombre = CE.Carrera_Nombre");
+			@mysqli_stmt_bind_param($stmt, 'ssssss' , $espNombre, $espApe1, $espApe2, $espCedula, $espCarnet, $espCarrera);
+		}
+		@mysqli_stmt_execute($stmt);
+		@mysqli_stmt_bind_result($stmt,$cedula,$nombre,$ape1,$ape2,$correo,$carnet);
+		$html="";
+		while(mysqli_stmt_fetch($stmt))
+		{
+			$html= $html."<tr><td>".$nombre."</td>"."<td>".$ape1."</td>"."<td>".$ape2."</td>"."<td>".$cedula."</td>"."<td>".$correo."</td>"."<td>".$carnet."</td>"."</tr>";
+		}
+		@mysqli_stmt_close($stmt);
+		@mysqli_close($conn); 
+		echo $html;
+	}
+	
+}
+else{
+	echo "¡Error, no se logro comunicar con el servidor!";
+}
+@mysqli_close($conn); 
+?>

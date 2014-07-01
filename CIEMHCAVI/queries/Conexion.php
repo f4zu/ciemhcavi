@@ -1,0 +1,32 @@
+<?php
+
+class Conexion
+{
+	//Attributes for the connection this may change according to the set up place for mysql 
+	private  $host = "localhost";
+	private $user = "root";
+	private $pw   = "AdJoRa2014:@";
+	private $db   = "CIMHCAVI";
+	private $con;
+	
+	//Method creates the connection to mySql
+	public function connection()
+	{
+		$this->con= mysqli_connect($this->host, $this->user, $this->pw, $this->db);
+		@mysqli_set_charset($this->con, "utf8");
+		if(mysqli_connect_errno())
+		{
+			return null;
+		}
+		else {
+			return $this->con;
+		}	
+	}
+	public function Close_Connectio()
+	{
+		@mysqli_close($this->con);
+	}
+}
+
+    
+?>

@@ -1,0 +1,196 @@
+body		{
+	background-color: #123181;
+}
+
+hr			{
+	border-color: #3552A0;
+}
+
+fieldset{
+	border-color: #3552A0;
+}
+
+fieldset{
+	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.67);
+}
+
+input[type="number"]{
+	width: 50px;
+}
+
+#logos img{
+	height: 70px;
+}
+
+#logos{
+	float: left;
+}
+
+.page		{
+	margin-left: auto; 
+	margin-right: auto;
+	padding: 10px;
+	display: block;
+	width: 75%;
+	background-color: white;
+	color: #123181;
+	font-size: small;
+	font-family: Arial;
+	min-width: 800px;
+}
+
+.header		{
+	clear: both;
+}
+
+.content	{
+	clear: both;
+	padding-top: 2%;
+	color: #3552A0;
+}
+
+#copyright	{
+	text-align: center;
+	color: white;
+}
+
+#user{
+	float: right;
+	height: 66px;
+}
+
+#img_user{
+	height: 66px;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.67);
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+#user_info img{
+	float: left;
+	margin-right: 15px;
+	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.67);
+}
+
+#user_name{
+	padding-right: 5px;
+	cursor: default;
+}
+
+#user_name a{
+	color: #3552A0;
+}
+
+#user ul{
+	list-style: none;
+	position: relative;
+}
+
+#user li ul{
+	position: absolute;
+}
+
+#user ul li ul li{
+	background-color: #3552A0;
+	visibility: hidden;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.67);
+	width: 190px;
+}
+
+#user ul:hover li ul li{
+	visibility: visible;
+}
+
+#user ul:hover li ul li a{
+	color: white;
+}
+
+
+#user ul li ul li:hover{
+	background-color: #5A77C5;
+	text-shadow: black 2px 2px 2px;
+}
+
+#user a{
+	text-decoration: none;
+	padding: 5px;
+}
+
+#nav{
+	clear: both;
+	padding-top: 30px;
+}
+
+#nav table{
+	width: 100%;
+	height:30px;
+	background-color: #3552A0;
+	text-align: center;
+}
+
+#nav table th{
+	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.67);
+}
+
+#nav table th:hover{
+	background-color: #5A77C5;
+	text-shadow: black 2px 2px 2px;
+	cursor: pointer;
+}
+
+#nav a{
+	text-decoration: none;
+	color: white;
+}
+
+#actual{
+	background-color: #5A77C5;
+	text-shadow: black 2px 2px 2px;
+}
+
+.results{
+	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.67);
+}
+
+.results th{
+	height:30px;
+	background-color: #3552A0;
+	text-align: center;
+	color: white;
+}
+
+.results th:hover{
+	text-shadow: black 2px 2px 2px;
+	cursor: default;
+}
+
+.results td{
+	border: 1px solid #3552A0;
+}
+
+.results tr:hover{
+	background-color: #5A77C5;
+	color: white;
+	cursor: pointer;
+}
+
+.results td:hover{
+	text-shadow: black 2px 2px 2px;
+}
+
+.submitB, .resets, .searchB{
+	float: right;
+}
+
+.addSearch, #fotoEst{
+	float:left;
+}
+
+.delComment{
+	cursor: pointer;
+}
+
+.date {
+	font-size: smaller;
+}
+
